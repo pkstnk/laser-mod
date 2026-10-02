@@ -1,0 +1,9 @@
+{
+  "name": "laser-mod",
+  "displayName": "Laser Colors",
+  "author": "pkstnk",
+  "main": "example.ExampleJavaMod",
+  "description": "RGB Lasers",
+  "version": "1.0",
+  "minGameVersion": "145"
+}
