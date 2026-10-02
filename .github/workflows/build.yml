@@ -1,0 +1,43 @@
+name: Build Android Mod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build Android Jar
+        run: |
+          chmod +x gradlew
+          ./gradlew jarAndroid
+
+      - name: Get Mod Version
+        id: version
+        run: |
+          VERSION=$(grep '"version":' core/assets/mod.json | sed 's/.*"version": "\(.*\)".*/\1/')
+          echo "VERSION=$VERSION" » $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-create-release@v1
+        with:
+          tag_name: v${{ env.VERSION }}-${{ github.run_number }}
+          release_name: Release v${{ env.VERSION }}
+          draft: false
+          prerelease: false
+          files: |
+            build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
