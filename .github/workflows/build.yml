@@ -16,6 +16,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android Licenses
+        run: |
+          yes | sdkmanager --licenses || true
+
       - name: Build Android Mod Packages
         run: |
           chmod +x gradlew
@@ -26,5 +33,5 @@ jobs:
         with:
           name: mindustry-android-mod
           path: |
-            **/build/deploy/
-            **/build/libs/
+            build/deploy/
+            core/build/deploy/
