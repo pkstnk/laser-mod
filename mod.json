@@ -5,5 +5,5 @@
   "main": "example.ExampleJavaMod",
   "description": "RGB Lasers",
   "version": "1.0",
-  "minGameVersion": "145"
+  "minGameVersion": "154"
 }
