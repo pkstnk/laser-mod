@@ -4,5 +4,5 @@ author: "pkstnk"
 main: "example.ExampleJavaMod"
 description: "Changes laser colors to RGB, Blue, and Green with an in-game menu."
 version: "1.0"
-minGameVersion: "146"
+minGameVersion: "105"
 hidden: false
